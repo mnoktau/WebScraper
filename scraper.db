@@ -1,0 +1,14 @@
+use DBI;
+
+my $dbh = DBI->connect("dbi:SQLite:dbname=scraper.db", "", "", { RaiseError => 1 }) or die $DBI::errstr;
+my $stmt = "
+CREATE TABLE IF NOT EXISTS Articles (
+    id INTEGER PRIMARY KEY,
+    title TEXT NOT NULL,
+    author TEXT,
+    date TEXT,
+    content TEXT
+);
+";
+$dbh->do($stmt);
+$dbh->disconnect();
